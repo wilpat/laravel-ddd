@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Property;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PropertyCreationRequest;
+use App\Http\Resources\PropertyResource;
 use Infrastructure\Property\Actions\CreatePropertyContract;
 
 class CreateController extends Controller
@@ -21,7 +22,7 @@ class CreateController extends Controller
 
         return response()->json([
           'message' => 'Property created successfully',
-          'data' => $action->handle($attributes)
+          'data' =>  new PropertyResource($action->handle($attributes))
         ]);
     }
 }

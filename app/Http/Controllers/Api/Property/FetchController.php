@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\Property;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PropertyResource;
 use Illuminate\Http\Request;
 use Infrastructure\Property\Queries\FetchPropertiesContract;
 
@@ -19,8 +20,8 @@ class FetchController extends Controller
     {
         return response()->json([
           'message' => 'Properties fetched successfully',
-          'data' => $query->handle($request->query())
+          'data' =>  PropertyResource::collection($query->handle($request->query()))->response()->getData(true)
         ]);
     }
-    
+
 }

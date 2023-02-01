@@ -11,8 +11,9 @@ class CreatePropertyAction implements CreatePropertyContract
 {
   public function handle(array $propertyAttributes): Property
   {
-    return tap(Property::create(), function (Property $property) use ($propertyAttributes) {
-      $property->address()->create($propertyAttributes['address']);
+    $property = tap(Property::create(), function (Property $property) use ($propertyAttributes) {
+      return $property->address()->create($propertyAttributes['address']);
     });
+    return $property->load('address');
   }
 }
