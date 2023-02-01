@@ -59,23 +59,23 @@ it('can create multiple properties', function () {
 })->group('property.creation');
 
 it('catches 500 errors during multiple property creation', function () {
-  $this->mock(CreateBatchPropertiesAction::class, function (MockInterface $mock) {
-      $mock->shouldReceive('handle')
-            ->andThrow(
-                new Exception('We could not process this request. Please try again later.',
-                    500)
-            );
-  });
+    $this->mock(CreateBatchPropertiesAction::class, function (MockInterface $mock) {
+        $mock->shouldReceive('handle')
+              ->andThrow(
+                  new Exception('We could not process this request. Please try again later.',
+                      500)
+              );
+    });
 
-  $propertyStub = Property::factory()->raw();
-  $batchPropertiesStub = [
-      'properties' => [
-          $propertyStub,
-          $propertyStub,
-          $propertyStub,
-      ],
-  ];
-  post(route('api.v1.property.batch.create'), $batchPropertiesStub)
-        ->assertServerError()
-        ->assertJson(['message' => 'We could not process this request. Please try again later.']);
+    $propertyStub = Property::factory()->raw();
+    $batchPropertiesStub = [
+        'properties' => [
+            $propertyStub,
+            $propertyStub,
+            $propertyStub,
+        ],
+    ];
+    post(route('api.v1.property.batch.create'), $batchPropertiesStub)
+          ->assertServerError()
+          ->assertJson(['message' => 'We could not process this request. Please try again later.']);
 })->group('property.creation');
