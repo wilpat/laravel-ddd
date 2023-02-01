@@ -17,4 +17,24 @@ it('can create a property', function () {
         'properties',
         array_merge($propertyStub, ['address' => json_encode($propertyStub['address'])])
     );
-})->group('propertycreation');
+})->group('property.creation');
+
+it('can create multiple properties', function () {
+  $propertyStub = Property::factory()->raw();
+
+  $batchPropertiesStub = [
+    'properties' => [
+      $propertyStub,
+      $propertyStub,
+      $propertyStub
+    ]
+  ];
+  post(route('api.v1.property.batch.create'), $batchPropertiesStub)
+        ->assertCreated()
+        ->assertJson(['message' => 'Properties created successfully']);
+
+  $this->assertDatabaseHas(
+      'properties',
+      array_merge($propertyStub, ['address' => json_encode($propertyStub['address'])])
+  );
+})->group('property.creation');

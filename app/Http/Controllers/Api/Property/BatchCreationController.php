@@ -23,6 +23,6 @@ class BatchCreationController extends Controller
         return response()->json([
             'message' => 'Properties created successfully',
             'data' => $attributes['properties'],
-        ]);
+        ], 201);
     }
 }
