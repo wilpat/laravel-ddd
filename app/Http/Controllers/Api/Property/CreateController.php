@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Api\Property;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PropertyCreationRequest;
 use Domains\Property\Resources\PropertyResource;
+use Domains\Property\Requests\PropertyCreationRequest;
 use Infrastructure\Property\Actions\CreatePropertyContract;
 
 class CreateController extends Controller
