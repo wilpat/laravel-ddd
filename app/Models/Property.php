@@ -18,8 +18,18 @@ class Property extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-      'uuid'
+      'uuid',
+      'address'
     ];
+
+    /**
+     * Summary of casts
+     * @var array<int, string>
+     */
+    protected $casts = [
+      'address' => 'array'
+    ];
+
     /**
      * Unique IDs to use in uuid generation
      * @return array<string>
@@ -27,14 +37,5 @@ class Property extends Model
     public function uniqueIds()
     {
       return ['uuid'];
-    }
-
-    /**
-     * Address relationship
-     * @return HasOne
-     */
-    public function address(): HasOne
-    {
-      return $this->hasOne(Address::class, 'property_id', 'id');
     }
 }

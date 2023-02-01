@@ -13,7 +13,6 @@ class FetchPropertiesQuery implements FetchPropertiesContract
   public function handle(array $queryParams): LengthAwarePaginator
   {
     return Property::query()
-              ->with('address')
               ->paginate(15)
               ->withQueryString();
   }

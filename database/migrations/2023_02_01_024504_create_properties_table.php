@@ -17,7 +17,9 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->uuid('uuid')->unique();
-            $table->string('type')->nullable();
+
+            $table->jsonb('address');
+            
             $table->timestamps();
         });
     }

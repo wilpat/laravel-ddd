@@ -18,12 +18,7 @@ class PropertyResource extends JsonResource
     {
         return [
           'uuid' => $this->uuid,
-          'address' => [
-            'line_1' => $this->address->line_1,
-            'line_2' => $this->address->line_2,
-            'postcode' => $this->address->postcode,
-          ]
-
+          'address' => $this->address
         ];
     }
 }
