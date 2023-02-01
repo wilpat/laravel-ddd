@@ -19,11 +19,17 @@ class CreateController extends Controller
      */
     public function __invoke(PropertyCreationRequest $request, CreatePropertyContract $action)
     {
-        $attributes = $request->validated();
+        try {
+            $attributes = $request->validated();
 
-        return response()->json([
-            'message' => 'Property created successfully',
-            'data' => new PropertyResource($action->handle($attributes)),
-        ], 201);
+            return response()->json([
+                'message' => 'Property created successfully',
+                'data' => new PropertyResource($action->handle($attributes)),
+            ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'We could not process this request. Please try again later.',
+            ], 500);
+        }
     }
 }

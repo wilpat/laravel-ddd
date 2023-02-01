@@ -19,9 +19,15 @@ class FetchController extends Controller
      */
     public function __invoke(Request $request, FetchPropertiesContract $query)
     {
-        return response()->json([
-            'message' => 'Properties fetched successfully',
-            'data' => PropertyResource::collection($query->handle($request->query()))->response()->getData(true),
-        ]);
+        try {
+            return response()->json([
+                'message' => 'Properties fetched successfully',
+                'data' => PropertyResource::collection($query->handle($request->query()))->response()->getData(true),
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'We could not process this request. Please try again later.',
+            ], 500);
+        }
     }
 }
