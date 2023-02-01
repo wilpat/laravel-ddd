@@ -1,66 +1,183 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Billing Better Interview API 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This the solution to the coding challenge given by Billing better
 
-## About Laravel
+## Requirements
+- Docker
+- PHP ^8.0.2
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Setup Dev Environment
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+After cloning the project run:
+```bash
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/opt \
+    -w /opt \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
+```
 
-## Learning Laravel
+### Copy the local environment file
+`cp .env.example .env`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Generate Application Key
+`./vendor/bin/sail artisan key:generate`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Run
+Next run the containers:
+```
+./vendor/bin/sail up
+```
+You can specify a custom port to run the app on in case port 80 is not free by running
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+APP_PORT=SOME-FREE-PORT ./vendor/bin/sail up
+```
 
-## Laravel Sponsors
+## Run the migrations
+```
+./vendor/bin/sail migrate
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Testing the API
+Use postman to make your API call to the running app against the correct port, for instance:
 
-## Contributing
+For port 80 would have a base_uri of `localhost:80`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Create property
 
-## Code of Conduct
+Path: POST /api/properties
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Payload: 
+```
+{ 
+  “address”: {
+    “line_1”: “10”,
+    “line_2”: “Test Street”,
+    “postcode”: “E11AA”
+  }
+}
+```
 
-## Security Vulnerabilities
+Response: 
+```
+{
+    "message": "Property created successfully",
+    "data": {
+        "uuid": "985cc756-86b8-43dd-8526-204cf929e53a",
+        "address": {
+            "line_1": "10",
+            "line_2": "Test street 2",
+            "postcode": "EE11AA"
+        }
+    }
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+Path: POST /api/properties/batch
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Payload: 
+```
+{
+    "properties": [
+        {
+            "address": {
+                "line_1": "10",
+                "line_2": "Test street",
+                "postcode": "1234"
+            }
+        },
+        {
+            "address": {
+                "line_1": "11",
+                "line_2": "Test street 1",
+                "postcode": "123455"
+            }
+        }
+    ]
+}
+```
+
+Response: 
+```
+{
+    "message": "Properties created successfully",
+    "data": [
+        {
+            "address": {
+                "line_1": "10",
+                "line_2": "Test street",
+                "postcode": "1234"
+            }
+        },
+        {
+            "address": {
+                "line_1": "11",
+                "line_2": "Test street 1",
+                "postcode": "123455"
+            }
+        },
+    ]
+}
+```
+
+### GET properties
+
+GET /api/properties
+Response: 
+```
+{
+    "message": "Properties fetched successfully",
+    "data": {
+        "data": [
+            {
+                "uuid": "985cc586-3a7c-41c5-9eb8-30d109d7b175",
+                "address": {
+                    "line_1": "10",
+                    "line_2": "Test street",
+                    "postcode": "EE11AA"
+                }
+            }
+        ],
+        "links": {
+            "first": "http://localhost:86/api/properties?limit=10&page=1",
+            "last": "http://localhost:86/api/properties?limit=10&page=1",
+            "prev": null,
+            "next": null
+        },
+        "meta": {
+            "current_page": 1,
+            "from": 1,
+            "last_page": 1,
+            "links": [
+                {
+                    "url": null,
+                    "label": "&laquo; Previous",
+                    "active": false
+                },
+                {
+                    "url": "http://localhost:86/api/properties?limit=10&page=1",
+                    "label": "1",
+                    "active": true
+                },
+                {
+                    "url": null,
+                    "label": "Next &raquo;",
+                    "active": false
+                }
+            ],
+            "path": "http://localhost:86/api/properties",
+            "per_page": 15,
+            "to": 1,
+            "total": 1
+        }
+    }
+}
+```
+
+
