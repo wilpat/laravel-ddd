@@ -17,7 +17,11 @@ class PropertyFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'address' => [
+              'line_1' => '10',
+              'line_2' => 'Test street',
+              'postcode' => '1234'
+            ]
         ];
     }
 }
