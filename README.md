@@ -53,7 +53,7 @@ For port 80 would have a base_uri of `localhost:80`
 
 ### Create property
 
-Path: POST /api/properties
+Path: POST /api/v1/properties
 
 Payload: 
 ```
@@ -82,7 +82,7 @@ Response:
 ```
 
 
-Path: POST /api/properties/batch
+Path: POST /api/v1/properties/batch
 
 Payload: 
 ```
@@ -131,7 +131,7 @@ Response:
 
 ### GET properties
 
-GET /api/properties
+GET /api/v1/properties
 Response: 
 ```
 {
