@@ -37,7 +37,7 @@ APP_PORT=SOME-FREE-PORT ./vendor/bin/sail up
 
 ## Run the migrations
 ```
-./vendor/bin/sail migrate
+./vendor/bin/sail artisan migrate
 ```
 
 
