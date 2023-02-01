@@ -5,7 +5,6 @@ namespace Domains\Property\Queries;
 
 use App\Models\Property;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
 use Infrastructure\Property\Queries\FetchPropertiesContract;
 
 class FetchPropertiesQuery implements FetchPropertiesContract
