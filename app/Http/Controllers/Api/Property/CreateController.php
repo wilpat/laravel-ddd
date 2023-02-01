@@ -23,6 +23,6 @@ class CreateController extends Controller
         return response()->json([
           'message' => 'Property created successfully',
           'data' =>  new PropertyResource($action->handle($attributes))
-        ]);
+        ], 201);
     }
 }
