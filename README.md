@@ -182,5 +182,7 @@ Response:
     }
 }
 ```
-
-
+## Running automated tests
+```
+./vendor/bin/sail artisan test
+```
