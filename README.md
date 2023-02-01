@@ -20,7 +20,9 @@ docker run --rm \
 ```
 
 ### Copy the local environment file
-`cp .env.example .env`
+```
+cp .env.example .env
+```
 
 ## Run
 Next run the containers:
@@ -33,7 +35,9 @@ You can specify a custom port to run the app on in case port 80 is not free by r
 APP_PORT=SOME-FREE-PORT ./vendor/bin/sail up
 ```
 ### Generate Application Key
-`./vendor/bin/sail artisan key:generate`
+```
+./vendor/bin/sail artisan key:generate
+```
 
 ## Run the migrations
 ```
