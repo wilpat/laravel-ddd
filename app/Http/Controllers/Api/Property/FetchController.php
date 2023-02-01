@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Property;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\PropertyResource;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Domains\Property\Resources\PropertyResource;
 use Infrastructure\Property\Queries\FetchPropertiesContract;
 
 class FetchController extends Controller
