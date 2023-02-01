@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace Domains\Property\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class PropertyCreationRequest extends FormRequest
 {
-
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
+            'success' => false,
+            'message' => 'Validation errors',
+            'data' => $validator->errors(),
         ]));
     }
 
@@ -28,10 +27,10 @@ class PropertyCreationRequest extends FormRequest
     public function rules(): array
     {
         return [
-          'address' => ['required', 'array'],
-          'address.line_1' => ['required', 'string'],
-          'address.line_2' => ['required', 'string'],
-          'address.postcode' => ['required', 'string'],
+            'address' => ['required', 'array'],
+            'address.line_1' => ['required', 'string'],
+            'address.line_2' => ['required', 'string'],
+            'address.postcode' => ['required', 'string'],
         ];
     }
 

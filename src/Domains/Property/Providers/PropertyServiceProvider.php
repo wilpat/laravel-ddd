@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Property\Providers;
@@ -13,14 +14,13 @@ use Infrastructure\Property\Queries\FetchPropertiesContract;
 
 class PropertyServiceProvider extends ServiceProvider
 {
-  public array $bindings = [
-    CreatePropertyContract::class => CreatePropertyAction::class,
-    FetchPropertiesContract::class => FetchPropertiesQuery::class,
-    CreateBatchPropertiesContract::class => CreateBatchPropertiesAction::class
-  ];
+    public array $bindings = [
+        CreatePropertyContract::class => CreatePropertyAction::class,
+        FetchPropertiesContract::class => FetchPropertiesQuery::class,
+        CreateBatchPropertiesContract::class => CreateBatchPropertiesAction::class,
+    ];
 
-  public function boot(): void
-  {
-    
-  }
+    public function boot(): void
+    {
+    }
 }

@@ -19,8 +19,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('properties')->as('property.')->group(function () {
-  Route::post('/', App\Http\Controllers\Api\Property\CreateController::class)->name('create');
-  Route::get('/', App\Http\Controllers\Api\Property\FetchController::class)->name('all');
+    Route::post('/', App\Http\Controllers\Api\Property\CreateController::class)->name('create');
+    Route::get('/', App\Http\Controllers\Api\Property\FetchController::class)->name('all');
 
-  Route::post('/batch', App\Http\Controllers\Api\Property\BatchCreationController::class)->name('batch.create');
+    Route::post('/batch', App\Http\Controllers\Api\Property\BatchCreationController::class)->name('batch.create');
 });

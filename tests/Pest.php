@@ -16,8 +16,6 @@ use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 uses(Tests\TestCase::class)->in('Feature', 'Unit', 'API');
 uses(LazilyRefreshDatabase::class)->in('Feature', 'Unit', 'API');
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Expectations

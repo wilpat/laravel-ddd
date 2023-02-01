@@ -18,10 +18,10 @@ class PropertyFactory extends Factory
     {
         return [
             'address' => [
-              'line_1' => '10',
-              'line_2' => 'Test street',
-              'postcode' => '1234'
-            ]
+                'line_1' => '10',
+                'line_2' => 'Test street',
+                'postcode' => '1234',
+            ],
         ];
     }
 }

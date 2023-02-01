@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Property\Queries;
@@ -9,10 +10,10 @@ use Infrastructure\Property\Queries\FetchPropertiesContract;
 
 class FetchPropertiesQuery implements FetchPropertiesContract
 {
-  public function handle(array $queryParams): LengthAwarePaginator
-  {
-    return Property::query()
-              ->paginate(15)
-              ->withQueryString();
-  }
+    public function handle(array $queryParams): LengthAwarePaginator
+    {
+        return Property::query()
+                  ->paginate(15)
+                  ->withQueryString();
+    }
 }

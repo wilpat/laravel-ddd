@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api\Property;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Domains\Property\Requests\BatchCreationRequest;
+use Illuminate\Http\Request;
 use Infrastructure\Property\Actions\CreateBatchPropertiesContract;
 
 class BatchCreationController extends Controller
@@ -21,8 +21,8 @@ class BatchCreationController extends Controller
         $action->handle($attributes);
 
         return response()->json([
-          'message' => 'Properties created successfully',
-          'data' =>  $attributes['properties']
+            'message' => 'Properties created successfully',
+            'data' => $attributes['properties'],
         ]);
     }
 }

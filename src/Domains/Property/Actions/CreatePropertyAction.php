@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Domains\Property\Actions;
@@ -8,8 +9,8 @@ use Infrastructure\Property\Actions\CreatePropertyContract;
 
 class CreatePropertyAction implements CreatePropertyContract
 {
-  public function handle(array $propertyAttributes): Property
-  {
-    return Property::create($propertyAttributes);
-  }
+    public function handle(array $propertyAttributes): Property
+    {
+        return Property::create($propertyAttributes);
+    }
 }

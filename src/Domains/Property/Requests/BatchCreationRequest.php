@@ -4,19 +4,18 @@ declare(strict_types=1);
 
 namespace Domains\Property\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 class BatchCreationRequest extends FormRequest
 {
-
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
+            'success' => false,
+            'message' => 'Validation errors',
+            'data' => $validator->errors(),
         ]));
     }
 
@@ -28,11 +27,11 @@ class BatchCreationRequest extends FormRequest
     public function rules(): array
     {
         return [
-          'properties' => ['required', 'array'],
-          'properties.*.address' => ['required', 'array'],
-          'properties.*.address.line_1' => ['required', 'string'],
-          'properties.*.address.line_2' => ['required', 'string'],
-          'properties.*.address.postcode' => ['required', 'string'],
+            'properties' => ['required', 'array'],
+            'properties.*.address' => ['required', 'array'],
+            'properties.*.address.line_1' => ['required', 'string'],
+            'properties.*.address.line_2' => ['required', 'string'],
+            'properties.*.address.postcode' => ['required', 'string'],
         ];
     }
 

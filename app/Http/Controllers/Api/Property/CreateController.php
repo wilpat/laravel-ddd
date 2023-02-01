@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Property;
 
 use App\Http\Controllers\Controller;
-use Domains\Property\Resources\PropertyResource;
 use Domains\Property\Requests\PropertyCreationRequest;
+use Domains\Property\Resources\PropertyResource;
 use Infrastructure\Property\Actions\CreatePropertyContract;
 
 class CreateController extends Controller
@@ -21,8 +22,8 @@ class CreateController extends Controller
         $attributes = $request->validated();
 
         return response()->json([
-          'message' => 'Property created successfully',
-          'data' =>  new PropertyResource($action->handle($attributes))
+            'message' => 'Property created successfully',
+            'data' => new PropertyResource($action->handle($attributes)),
         ], 201);
     }
 }
