@@ -1,6 +1,6 @@
-# Billing Better Interview API 
+# DDD with Laravel
 
-This the solution to the coding challenge given by Billing better
+A simple app to create and read data on a database using the domain driven design pattern
 
 ## Requirements
 - Docker
