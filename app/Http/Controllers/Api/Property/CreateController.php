@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api\Property;
 use App\Http\Controllers\Controller;
 use Domains\Property\Requests\PropertyCreationRequest;
 use Domains\Property\Resources\PropertyResource;
+use Illuminate\Support\Facades\Log;
 use Infrastructure\Property\Actions\CreatePropertyContract;
 
 class CreateController extends Controller
@@ -21,6 +22,8 @@ class CreateController extends Controller
     {
         try {
             $attributes = $request->validated();
+            Log::info("Adding a second commit to the new branch a");
+
 
             return response()->json([
                 'message' => 'Property created successfully',
